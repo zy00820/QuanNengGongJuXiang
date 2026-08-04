@@ -31,8 +31,15 @@ object DeviceUtils {
 
     fun cpuInfo(): CpuInfo {
         val cores = Runtime.getRuntime().availableProcessors()
-        val abi = Build.SUPPORTED_ABIS.joinToString(", ")
-        val arch = Build.SUPPORTED_ABIS.firstOrNull() ?: "unknown"
+        // Build.SUPPORTED_ABIS 为 API 21+，API 19-20 需回退到 Build.CPU_ABI/CPU_ABI2
+        val abiList: List<String> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Build.SUPPORTED_ABIS.toList()
+        } else {
+            @Suppress("DEPRECATION")
+            listOfNotNull(Build.CPU_ABI, Build.CPU_ABI2)
+        }
+        val abi = abiList.joinToString(", ")
+        val arch = abiList.firstOrNull() ?: "unknown"
         val freq = readCpuMaxFreq()
         val hw = readCpuField("Hardware")
         val proc = readCpuField("Processor")

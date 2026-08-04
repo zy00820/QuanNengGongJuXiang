@@ -1,11 +1,11 @@
 package com.qngxj.toolbox
 
-import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.multidex.MultiDexApplication
 import com.qngxj.toolbox.util.Prefs
 
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- minSdk 19 低于部分 AndroidX 库声明的 minSdk 21，
+         库内部已通过 AppCompat 兼容层处理低版本运行时，此处强制覆盖以放行 manifest 合并。
+         真正的运行时风险由代码层 Build.VERSION 判断控制。 -->
+    <uses-sdk tools:overrideLibrary="androidx.appcompat.resources, androidx.appcompat, androidx.core, androidx.fragment, androidx.fragment.ktx, androidx.activity, androidx.recyclerview, androidx.viewpager2, androidx.swiperefreshlayout, androidx.preference, androidx.lifecycle.viewmodel, androidx.lifecycle.runtime, com.google.android.material, rikka.shizuku.shared, rikka.shizuku.api, rikka.shizuku.aidl" />
+
     <!-- 离线工具：仅本地权限，无网络/后台/隐私收集 -->
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
