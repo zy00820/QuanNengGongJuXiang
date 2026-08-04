@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 安卓 15 (API 35)+ 主题覆盖：禁用强制 edge-to-edge，保持状态栏/导航栏背景色 -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- API 35+ 主题：继承公共基础，禁用强制 edge-to-edge -->
+    <style name="Theme.QNGXJ" parent="Theme.QNGXJ.Base">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:targetApi="35">true</item>
+    </style>
+
+</resources>

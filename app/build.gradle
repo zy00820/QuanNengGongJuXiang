@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace 'com.qngxj.toolbox'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.qngxj.toolbox"
         minSdk 24
-        targetSdk 34
-        versionCode 1113
-        versionName "1.1.3"
+        targetSdk 35
+        versionCode 1114
+        versionName "1.1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

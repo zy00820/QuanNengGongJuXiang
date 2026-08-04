@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -66,11 +67,35 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- 通知权限提示（安卓 13+ 未授权时显示） -->
+        <TextView
+            android:id="@+id/tv_notify_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="12dp"
+            android:background="@drawable/bg_hint_card"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:text="通知权限未开启，点击下方按钮前往系统设置开启"
+            tools:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_open_notify_settings"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="前往系统通知设置"
+            android:visibility="gone"
+            app:cornerRadius="20dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="本应用完全离线运行，仅“检查更新”在用户主动触发时联网。"
+            android:text="本应用完全离线运行，仅“检查更新”在用户主动触发时联网。&#10;安卓 13 及以上系统需手动授予通知权限。"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="11sp" />
 

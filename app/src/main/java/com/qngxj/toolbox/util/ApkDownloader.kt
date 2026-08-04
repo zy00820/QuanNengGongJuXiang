@@ -100,6 +100,10 @@ object ApkDownloader {
 
     /**
      * 触发系统安装意图。调用方需确保已配置 FileProvider（authority = "${applicationId}.fileprovider"）。
+     *
+     * 兼容安卓 7.0 ~ 16：
+     * - 安卓 7.0+：必须通过 FileProvider 共享文件
+     * - 安卓 14+：安装未知来源应用需用户在系统设置中授权，系统会自动引导
      */
     fun installApk(ctx: Context, apkFile: File) {
         try {
@@ -115,16 +119,18 @@ object ApkDownloader {
             }
             ctx.startActivity(intent)
         } catch (e: Exception) {
-            // 兜底：直接打开浏览器下载页
+            // 兜底：跳转到系统文件管理器
             try {
-                val browser = android.content.Intent(
-                    android.content.Intent.ACTION_VIEW,
-                    android.net.Uri.parse(apkFile.absolutePath)
-                )
-                browser.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
-                ctx.startActivity(browser)
+                val intent = android.content.Intent(android.content.Intent.ACTION_GET_CONTENT).apply {
+                    type = "application/vnd.android.package-archive"
+                    addCategory(android.content.Intent.CATEGORY_OPENABLE)
+                    addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                ctx.startActivity(android.content.Intent.createChooser(intent, "选择安装程序").apply {
+                    addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                })
             } catch (_: Exception) {
-                // 静默忽略
+                // 最终兜底：静默忽略
             }
         }
     }
