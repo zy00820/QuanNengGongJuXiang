@@ -43,6 +43,31 @@ class ToolboxFragment : Fragment() {
             Tool(getString(R.string.tool_system_shortcut), getString(R.string.tool_system_shortcut_desc), R.drawable.ic_tool_shortcut) {
                 showShortcuts()
             },
+            Tool(getString(R.string.tool_vendor_xiaomi), getString(R.string.tool_vendor_xiaomi_desc), R.drawable.ic_vendor_xiaomi) {
+                val intent = Intent(ctx, VendorToolsActivity::class.java)
+                intent.putExtra(VendorToolsActivity.EXTRA_VENDOR, VendorToolsActivity.VENDOR_XIAOMI)
+                startActivity(intent)
+            },
+            Tool(getString(R.string.tool_vendor_vivo), getString(R.string.tool_vendor_vivo_desc), R.drawable.ic_vendor_vivo) {
+                val intent = Intent(ctx, VendorToolsActivity::class.java)
+                intent.putExtra(VendorToolsActivity.EXTRA_VENDOR, VendorToolsActivity.VENDOR_VIVO)
+                startActivity(intent)
+            },
+            Tool(getString(R.string.tool_vendor_huawei), getString(R.string.tool_vendor_huawei_desc), R.drawable.ic_vendor_huawei) {
+                val intent = Intent(ctx, VendorToolsActivity::class.java)
+                intent.putExtra(VendorToolsActivity.EXTRA_VENDOR, VendorToolsActivity.VENDOR_HUAWEI)
+                startActivity(intent)
+            },
+            Tool(getString(R.string.tool_vendor_oppo), getString(R.string.tool_vendor_oppo_desc), R.drawable.ic_vendor_oppo) {
+                val intent = Intent(ctx, VendorToolsActivity::class.java)
+                intent.putExtra(VendorToolsActivity.EXTRA_VENDOR, VendorToolsActivity.VENDOR_OPPO)
+                startActivity(intent)
+            },
+            Tool(getString(R.string.tool_vendor_samsung), getString(R.string.tool_vendor_samsung_desc), R.drawable.ic_vendor_samsung) {
+                val intent = Intent(ctx, VendorToolsActivity::class.java)
+                intent.putExtra(VendorToolsActivity.EXTRA_VENDOR, VendorToolsActivity.VENDOR_SAMSUNG)
+                startActivity(intent)
+            },
             Tool(getString(R.string.tool_shizuku), getString(R.string.shizuku_request_auth), R.drawable.ic_tool_shizuku) {
                 if (!LicenseManager.canUseShizuku(ctx)) {
                     Snackbar.make(view, getString(R.string.shizuku_need_member), Snackbar.LENGTH_LONG)

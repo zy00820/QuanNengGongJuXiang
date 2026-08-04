@@ -36,6 +36,43 @@
     <string name="extract_success">已提取到：</string>
     <string name="extract_fail">提取失败</string>
 
+    <!-- 厂商板块 -->
+    <string name="title_vendor">厂商工具</string>
+    <string name="tool_vendor_xiaomi">小米板块</string>
+    <string name="tool_vendor_xiaomi_desc">极致模式/开发者/安全中心</string>
+    <string name="tool_vendor_vivo">vivo 板块</string>
+    <string name="tool_vendor_vivo_desc">i 管家/设置/开发者</string>
+    <string name="tool_vendor_huawei">华为板块</string>
+    <string name="tool_vendor_huawei_desc">手机管家/设置/开发者</string>
+    <string name="tool_vendor_oppo">OPPO 板块</string>
+    <string name="tool_vendor_oppo_desc">手机管家/设置/开发者</string>
+    <string name="tool_vendor_samsung">三星板块</string>
+    <string name="tool_vendor_samsung_desc">设备维护/设置/开发者</string>
+    <string name="vendor_not_supported">当前设备非该品牌，部分功能可能不可用</string>
+    <string name="vendor_jump_fail">该机型不支持此跳转</string>
+    <string name="vendor_xiaomi_extreme_mode">强开极致模式</string>
+    <string name="vendor_xiaomi_extreme_mode_desc">通过 Shizuku 写入系统属性（需授权）</string>
+    <string name="vendor_xiaomi_extreme_running">正在开启极致模式…</string>
+    <string name="vendor_xiaomi_extreme_success">极致模式已开启（性能全开）</string>
+    <string name="vendor_xiaomi_extreme_fail">开启失败：Shizuku 未授权或不可用</string>
+    <string name="vendor_xiaomi_security">安全中心</string>
+    <string name="vendor_xiaomi_battery">省电优化</string>
+    <string name="vendor_xiaomi_permission">权限管理</string>
+    <string name="vendor_vivo_imanager">i 管家</string>
+    <string name="vendor_vivo_battery">省电管理</string>
+    <string name="vendor_vivo_permission">权限管理</string>
+    <string name="vendor_huawei_manager">手机管家</string>
+    <string name="vendor_huawei_battery">电池管理</string>
+    <string name="vendor_huawei_permission">权限管理</string>
+    <string name="vendor_oppo_manager">手机管家</string>
+    <string name="vendor_oppo_battery">电池管理</string>
+    <string name="vendor_oppo_permission">权限管理</string>
+    <string name="vendor_samsung_maintenance">设备维护</string>
+    <string name="vendor_samsung_battery">电池管理</string>
+    <string name="vendor_samsung_permission">权限管理</string>
+    <string name="vendor_developer">开发者选项</string>
+    <string name="vendor_settings">系统设置</string>
+
     <!-- 固件查询 -->
     <string name="title_firmware_detail">固件详情</string>
     <string name="firmware_search_hint">搜索机型/版本号/Android 版本</string>

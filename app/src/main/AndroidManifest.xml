@@ -63,6 +63,10 @@
             android:exported="false"
             android:label="@string/title_app_detail" />
         <activity
+            android:name=".ui.toolbox.VendorToolsActivity"
+            android:exported="false"
+            android:label="@string/title_vendor" />
+        <activity
             android:name=".ui.member.MemberActivity"
             android:exported="false"
             android:label="@string/title_member" />

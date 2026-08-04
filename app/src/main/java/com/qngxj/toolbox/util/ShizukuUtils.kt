@@ -2,7 +2,9 @@ package com.qngxj.toolbox.util
 
 import android.content.Context
 import android.content.pm.PackageManager
+import moe.shizuku.server.IShizukuService
 import rikka.shizuku.Shizuku
+import rikka.shizuku.ShizukuBinderWrapper
 
 /**
  * Shizuku 集成（SDK 内置，无需用户额外下载库）。
@@ -69,6 +71,42 @@ object ShizukuUtils {
             if (Shizuku.pingBinder()) "v" + Shizuku.getVersion() else "未运行"
         } catch (e: Exception) {
             "未知"
+        }
+    }
+
+    /**
+     * 通过 Shizuku 执行 shell 命令（需已授权）。
+     * @param cmd 命令字符串（如 "settings put global extreme_mode 1"）
+     * @return Pair(success, output)，success 为是否执行成功
+     */
+    fun execCommand(cmd: String): Pair<Boolean, String> {
+        return try {
+            if (!checkPermission()) return Pair(false, "Shizuku 未授权")
+            // 通过 IShizukuService 直接调用 newProcess（shell 权限执行）
+            val binder = Shizuku.getBinder() ?: return Pair(false, "Shizuku 服务不可用")
+            val wrapped = ShizukuBinderWrapper(binder)
+            val service = IShizukuService.Stub.asInterface(wrapped)
+            val remoteProcess = service.newProcess(arrayOf("sh", "-c", cmd), null, null)
+            // 读取输出与错误流（ParcelFileDescriptor → FileInputStream）
+            val input = readPfd(remoteProcess.inputStream)
+            val err = readPfd(remoteProcess.errorStream)
+            val code = remoteProcess.waitFor()
+            val out = if (input.isNotEmpty()) input else err
+            Pair(code == 0, out)
+        } catch (e: Exception) {
+            Pair(false, e.message ?: "执行异常")
+        }
+    }
+
+    /** 将 ParcelFileDescriptor 的内容读为字符串 */
+    private fun readPfd(pfd: android.os.ParcelFileDescriptor): String {
+        return try {
+            val fis = java.io.FileInputStream(pfd.fileDescriptor)
+            fis.use { it.bufferedReader().readText() }
+        } catch (e: Exception) {
+            ""
+        } finally {
+            try { pfd.close() } catch (_: Exception) {}
         }
     }
 }

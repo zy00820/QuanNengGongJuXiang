@@ -11,8 +11,8 @@ android {
         applicationId "com.qngxj.toolbox"
         minSdk 19
         targetSdk 35
-        versionCode 1115
-        versionName "1.1.5"
+        versionCode 1116
+        versionName "1.1.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // 安卓 4.4-5.0 (API 19-20) 不支持矢量 drawable，启用兼容模式
@@ -91,6 +91,7 @@ dependencies {
     // Shizuku SDK（内置，无需用户额外下载）
     implementation 'dev.rikka.shizuku:api:13.1.5'
     implementation 'dev.rikka.shizuku:shared:13.1.5'
+    implementation 'dev.rikka.shizuku:aidl:13.1.5'
 
     // 网络检查更新
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
