@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- 头部 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="?attr/colorSurface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@mipmap/ic_launcher"
+                    tools:ignore="ContentDescription"
+                    xmlns:tools="http://schemas.android.com/tools" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="14dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textStyle="bold"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_member_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 会员中心 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_member"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <include layout="@layout/item_setting_row"
+                android:id="@+id/row_member" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Shizuku 状态 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_shizuku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <include layout="@layout/item_setting_row"
+                android:id="@+id/row_shizuku" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 设置列表 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="?attr/colorSurface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_setting_row" android:id="@+id/row_dark" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider_light" />
+                <include layout="@layout/item_setting_row" android:id="@+id/row_notify" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider_light" />
+                <include layout="@layout/item_setting_row" android:id="@+id/row_update" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider_light" />
+                <include layout="@layout/item_setting_row" android:id="@+id/row_about" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/divider_light" />
+                <include layout="@layout/item_setting_row" android:id="@+id/row_dev" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:text="@string/about_compliance_desc"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

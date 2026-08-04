@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">全能工具箱</string>
+    <string name="app_version">V1.1.2</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_home">硬件检测</string>
+    <string name="nav_toolbox">工具箱</string>
+    <string name="nav_firmware">固件查询</string>
+    <string name="nav_mine">我的</string>
+
+    <!-- 硬件检测 -->
+    <string name="hw_cpu">CPU 处理器</string>
+    <string name="hw_gpu">GPU 图形</string>
+    <string name="hw_screen">屏幕参数</string>
+    <string name="hw_battery">电池健康</string>
+    <string name="hw_system">系统版本</string>
+    <string name="hw_memory">内存存储</string>
+    <string name="hw_device">设备型号</string>
+    <string name="hw_sensor">传感器</string>
+
+    <!-- 工具箱 -->
+    <string name="title_app_list">应用管理</string>
+    <string name="title_app_detail">应用详情</string>
+    <string name="tool_app_manage">应用管理</string>
+    <string name="tool_app_manage_desc">查看已安装应用、提取 APK</string>
+    <string name="tool_system_shortcut">系统快捷跳转</string>
+    <string name="tool_system_shortcut_desc">原生设置/开发者选项/硬件检测</string>
+    <string name="tool_apk_extract">APK 提取</string>
+    <string name="tool_shizuku">Shizuku 授权</string>
+    <string name="shortcut_settings">原生设置</string>
+    <string name="shortcut_developer">开发者选项</string>
+    <string name="shortcut_hardware">硬件检测入口</string>
+    <string name="extract_apk">提取 APK</string>
+    <string name="view_detail">应用信息</string>
+    <string name="extract_success">已提取到：</string>
+    <string name="extract_fail">提取失败</string>
+
+    <!-- 固件查询 -->
+    <string name="title_firmware_detail">固件详情</string>
+    <string name="firmware_search_hint">搜索机型/版本号/Android 版本</string>
+    <string name="firmware_local_only">V1.0 纯本地界面，暂不联网查询</string>
+    <string name="firmware_cat_all">全部</string>
+    <string name="firmware_cat_stable">正式版</string>
+    <string name="firmware_cat_beta">测试版</string>
+    <string name="firmware_cat_dev">开发版</string>
+    <string name="firmware_cat_custom">定制版</string>
+
+    <!-- 我的 -->
+    <string name="title_member">会员中心</string>
+    <string name="title_about">关于软件</string>
+    <string name="title_notify">通知设置</string>
+    <string name="title_update">检查更新</string>
+    <string name="mine_dark_mode">深色模式</string>
+    <string name="mine_notify">通知设置</string>
+    <string name="mine_about">关于软件</string>
+    <string name="mine_update">检查更新</string>
+    <string name="mine_member">会员中心</string>
+    <string name="mine_shizuku">Shizuku 权限状态</string>
+    <string name="mine_developer">了解开发者</string>
+
+    <!-- 关于 -->
+    <string name="about_version">版本</string>
+    <string name="about_intro">全能工具箱是一款纯本地离线安卓工具，无服务器、无广告、无后台请求，兼容全品牌安卓机型。</string>
+    <string name="about_dev_lead">张岳（总）</string>
+    <string name="about_dev_ui">黄松（UI 设计）</string>
+    <string name="about_dev_title">开发团队</string>
+    <string name="about_compliance">合规声明</string>
+    <string name="about_compliance_desc">无隐私收集、无后台行为、完全离线可用（检查更新仅在用户主动触发时联网）。</string>
+
+    <!-- Shizuku -->
+    <string name="shizuku_status_unknown">未知</string>
+    <string name="shizuku_status_not_running">未运行</string>
+    <string name="shizuku_status_running_unauthorized">运行中（未授权）</string>
+    <string name="shizuku_status_authorized">已授权</string>
+    <string name="shizuku_request_auth">请求 Shizuku 授权</string>
+    <string name="shizuku_no_manager">未检测到 Shizuku 服务</string>
+    <string name="shizuku_need_member">Shizuku 相关功能需激活会员后使用</string>
+
+    <!-- 会员 -->
+    <string name="member_lite">会员 Lite</string>
+    <string name="member_pro">会员 Pro</string>
+    <string name="member_device_code">设备代码</string>
+    <string name="member_input_code">请输入激活码</string>
+    <string name="member_activate">激活</string>
+    <string name="member_status_none">未激活</string>
+    <string name="member_status_lite">已激活 Lite</string>
+    <string name="member_status_pro">已激活 Pro</string>
+    <string name="member_activate_success">激活成功</string>
+    <string name="member_activate_fail">激活码无效或已被使用</string>
+    <string name="member_code_used">该激活码已被使用</string>
+    <string name="member_copy_device">复制设备代码</string>
+    <string name="member_lite_desc">解锁 Shizuku 授权相关功能</string>
+    <string name="member_pro_desc">解锁全部高级功能（含 Shizuku 全部能力）</string>
+    <string name="member_codes_list">激活码清单（共 %d 个）</string>
+
+    <!-- 更新 -->
+    <string name="update_check">检查更新</string>
+    <string name="update_latest">已是最新版本</string>
+    <string name="update_found">发现新版本</string>
+    <string name="update_download">下载更新</string>
+    <string name="update_checking">正在检查…</string>
+    <string name="update_net_error">网络异常，请稍后重试</string>
+    <string name="update_no_channel">未配置更新源</string>
+
+    <!-- 通用 -->
+    <string name="copy_success">已复制</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="back">返回</string>
+    <string name="loading">加载中…</string>
+    <string name="empty">暂无数据</string>
+</resources>

@@ -1,0 +1,17 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+app/build
+init.gradle
+activation_codes.txt
+gen_codes.py
+# 签名密钥库（不提交，避免泄露；云端打包自动回退 debug 签名）
+*.jks
+*.keystore
+keystore.properties

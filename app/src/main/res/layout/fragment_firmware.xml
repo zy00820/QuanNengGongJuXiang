@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:hintEnabled="false"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/firmware_search_hint"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="8dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:singleSelection="true"
+        xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp"
+        android:text="@string/firmware_local_only" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:padding="8dp" />
+
+</LinearLayout>
