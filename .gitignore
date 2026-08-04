@@ -18,3 +18,6 @@ keystore.properties
 # 本地 Java 版本管理配置（仅本地开发环境使用，云端打包按自身环境配置）
 mise.toml
 .mise.toml
+
+# 激活码明文文档（含敏感信息，不上传公开仓库，仅本地保留或通过 Release 附件分发）
+*.docx
