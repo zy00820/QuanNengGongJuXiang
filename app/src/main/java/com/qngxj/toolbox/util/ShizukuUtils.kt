@@ -3,7 +3,6 @@ package com.qngxj.toolbox.util
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.core.content.FileProvider
 import moe.shizuku.server.IShizukuService
 import rikka.shizuku.Shizuku
@@ -186,13 +185,7 @@ object ShizukuUtils {
         return try {
             val apkPath = extractBundledApk(ctx) ?: return false
             val apkFile = File(apkPath)
-            // Android 7.0+ 需用 FileProvider 共享
-            val uri = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                FileProvider.getUriForFile(ctx, "${ctx.packageName}.fileprovider", apkFile)
-            } else {
-                @Suppress("DEPRECATION")
-                Uri.fromFile(apkFile)
-            }
+            val uri = FileProvider.getUriForFile(ctx, "${ctx.packageName}.fileprovider", apkFile)
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 setDataAndType(uri, "application/vnd.android.package-archive")
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)

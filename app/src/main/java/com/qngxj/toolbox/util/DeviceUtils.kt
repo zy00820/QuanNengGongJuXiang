@@ -31,13 +31,7 @@ object DeviceUtils {
 
     fun cpuInfo(): CpuInfo {
         val cores = Runtime.getRuntime().availableProcessors()
-        // Build.SUPPORTED_ABIS 为 API 21+，API 19-20 需回退到 Build.CPU_ABI/CPU_ABI2
-        val abiList: List<String> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Build.SUPPORTED_ABIS.toList()
-        } else {
-            @Suppress("DEPRECATION")
-            listOfNotNull(Build.CPU_ABI, Build.CPU_ABI2)
-        }
+        val abiList = Build.SUPPORTED_ABIS.toList()
         val abi = abiList.joinToString(", ")
         val arch = abiList.firstOrNull() ?: "unknown"
         val freq = readCpuMaxFreq()
@@ -159,7 +153,7 @@ object DeviceUtils {
         return OsInfo(
             Build.VERSION.RELEASE ?: "未知",
             Build.VERSION.SDK_INT,
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Build.VERSION.SECURITY_PATCH ?: "未知" else "未知",
+            Build.VERSION.SECURITY_PATCH ?: "未知",
             try { java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(java.util.Date(Build.TIME)) } catch (e: Exception) { "未知" }
         )
     }
@@ -240,8 +234,8 @@ object DeviceUtils {
                 val app = pi.applicationInfo ?: return@mapNotNull null
                 val name = pm.getApplicationLabel(app).toString()
                 val systemApp = (app.flags and android.content.pm.ApplicationInfo.FLAG_SYSTEM) != 0
-                val versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) pi.longVersionCode else @Suppress("DEPRECATION") pi.versionCode.toLong()
-                val minSdk = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) app.minSdkVersion else android.os.Build.VERSION_CODES.BASE
+                val versionCode = pi.longVersionCode
+                val minSdk = app.minSdkVersion
                 val targetSdk = app.targetSdkVersion
                 var size = 0L
                 try { size = java.io.File(app.sourceDir).length() } catch (e: Exception) {}
