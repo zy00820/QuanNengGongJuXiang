@@ -9,19 +9,17 @@ class App : Application() {
 
     override fun attachBaseContext(base: android.content.Context) {
         super.attachBaseContext(base)
-        // ShizukuProvider 在 Application.onCreate 之前实例化，其 onCreate 默认会尝试 Sui 初始化。
-        // 本应用内置 Shizuku 服务端，不使用 Sui，在此提前禁用以避免启动时潜在崩溃。
-        try {
-            ShizukuProvider.disableAutomaticSuiInitialization()
-        } catch (_: Throwable) {
-        }
+        // 必须在 ContentProvider.onCreate 之前禁用 Sui 自动初始化，
+        // 否则 ShizukuProvider.onCreate 会调用 Sui.init() 触发 transact，
+        // 在未安装 Sui/Riru 的设备上可能被系统安全策略直接杀进程导致启动崩溃。
+        // minSdk 29 使用 ART 运行时，多 DEX 跨包类引用安全。
+        runCatching { ShizukuProvider.disableAutomaticSuiInitialization() }
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
         applyTheme(Prefs.darkMode(this))
-        // Shizuku SDK 通过 manifest 中的 ShizukuProvider 自动绑定，无需手动初始化
     }
 
     companion object {

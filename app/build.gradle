@@ -11,8 +11,8 @@ android {
         applicationId "com.qngxj.toolbox"
         minSdk 29
         targetSdk 35
-        versionCode 1120
-        versionName "1.2.0"
+        versionCode 1121
+        versionName "1.2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,6 +34,10 @@ android {
                 storePassword 'qngxj123456'
                 keyAlias 'qngxj'
                 keyPassword 'qngxj123456'
+                // 启用 v1+v2+v3 签名方案，确保各版本安卓兼容安装
+                enableV1Signing true
+                enableV2Signing true
+                enableV3Signing true
             }
         }
     }
