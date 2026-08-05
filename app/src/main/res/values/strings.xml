@@ -114,6 +114,29 @@
     <string name="shizuku_no_manager">未检测到 Shizuku 服务</string>
     <string name="shizuku_need_member">Shizuku 相关功能需激活会员后使用</string>
 
+    <!-- 内置 Shizuku 管理（V1.1.7） -->
+    <string name="title_shizuku_manager">内置 Shizuku</string>
+    <string name="shizuku_bundled_title">内置 Shizuku 服务</string>
+    <string name="shizuku_bundled_desc">无需安装新软件，直接启动 Shizuku 服务端</string>
+    <string name="shizuku_service_status">服务状态</string>
+    <string name="shizuku_root_status">Root 状态</string>
+    <string name="shizuku_rooted">已 Root</string>
+    <string name="shizuku_not_rooted">未 Root</string>
+    <string name="shizuku_start_via_root">一键启动服务（Root）</string>
+    <string name="shizuku_start_via_root_desc">通过 app_process 直接启动，无需安装 Shizuku</string>
+    <string name="shizuku_install_bundled">一键安装内置 Shizuku</string>
+    <string name="shizuku_install_bundled_desc">无 Root 设备回退方案，安装后通过 adb 激活</string>
+    <string name="shizuku_open_app">打开 Shizuku 应用</string>
+    <string name="shizuku_refresh">刷新状态</string>
+    <string name="shizuku_request_auth_btn">请求授权</string>
+    <string name="shizuku_starting">正在启动服务…</string>
+    <string name="shizuku_start_success">服务已启动，请点击「请求授权」</string>
+    <string name="shizuku_install_opening">正在打开安装器…</string>
+    <string name="shizuku_install_fail">无法启动安装器</string>
+    <string name="shizuku_app_not_installed">Shizuku 应用未安装</string>
+    <string name="shizuku_bundled_apk_info">内置版本：v13.6.0</string>
+    <string name="shizuku_tips">提示：Root 设备可一键启动服务；非 Root 设备请安装内置 Shizuku 后通过 adb 激活。</string>
+
     <!-- 会员 -->
     <string name="member_lite">会员 Lite</string>
     <string name="member_pro">会员 Pro</string>

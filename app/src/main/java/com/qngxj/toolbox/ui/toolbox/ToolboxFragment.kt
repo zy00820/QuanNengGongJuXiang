@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.qngxj.toolbox.R
-import com.qngxj.toolbox.ui.member.MemberActivity
-import com.qngxj.toolbox.util.LicenseManager
 
 class ToolboxFragment : Fragment() {
 
@@ -68,15 +66,8 @@ class ToolboxFragment : Fragment() {
                 intent.putExtra(VendorToolsActivity.EXTRA_VENDOR, VendorToolsActivity.VENDOR_SAMSUNG)
                 startActivity(intent)
             },
-            Tool(getString(R.string.tool_shizuku), getString(R.string.shizuku_request_auth), R.drawable.ic_tool_shizuku) {
-                if (!LicenseManager.canUseShizuku(ctx)) {
-                    Snackbar.make(view, getString(R.string.shizuku_need_member), Snackbar.LENGTH_LONG)
-                        .setAction(getString(R.string.member_activate)) {
-                            startActivity(Intent(ctx, MemberActivity::class.java))
-                        }.show()
-                } else {
-                    startActivity(Intent(ctx, MemberActivity::class.java))
-                }
+            Tool(getString(R.string.tool_shizuku), getString(R.string.shizuku_bundled_desc), R.drawable.ic_tool_shizuku) {
+                startActivity(Intent(ctx, com.qngxj.toolbox.ui.shizuku.ShizukuManagerActivity::class.java))
             }
         )
 

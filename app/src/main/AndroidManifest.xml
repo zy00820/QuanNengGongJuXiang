@@ -75,6 +75,10 @@
             android:exported="false"
             android:label="@string/title_update" />
         <activity
+            android:name=".ui.shizuku.ShizukuManagerActivity"
+            android:exported="false"
+            android:label="@string/title_shizuku_manager" />
+        <activity
             android:name=".ui.mine.AboutActivity"
             android:exported="false"
             android:label="@string/title_about" />

@@ -11,8 +11,8 @@ android {
         applicationId "com.qngxj.toolbox"
         minSdk 19
         targetSdk 35
-        versionCode 1116
-        versionName "1.1.6"
+        versionCode 1117
+        versionName "1.1.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // 安卓 4.4-5.0 (API 19-20) 不支持矢量 drawable，启用兼容模式

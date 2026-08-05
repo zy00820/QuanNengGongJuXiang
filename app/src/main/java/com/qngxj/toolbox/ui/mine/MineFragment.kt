@@ -57,16 +57,19 @@ class MineFragment : Fragment() {
         binding.cardMember.setOnClickListener { startActivity(Intent(ctx, MemberActivity::class.java)) }
 
         binding.cardShizuku.setOnClickListener {
-            if (!LicenseManager.canUseShizuku(ctx)) {
-                Snackbar.make(binding.root, getString(R.string.shizuku_need_member), Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.member_activate)) {
-                        startActivity(Intent(ctx, MemberActivity::class.java))
-                    }.show()
-                return@setOnClickListener
-            }
             when (ShizukuUtils.state()) {
-                ShizukuUtils.State.NOT_RUNNING -> Snackbar.make(binding.root, getString(R.string.shizuku_no_manager), Snackbar.LENGTH_LONG).show()
+                ShizukuUtils.State.NOT_RUNNING -> {
+                    // 服务未运行，跳转到内置 Shizuku 管理页启动服务
+                    startActivity(Intent(ctx, com.qngxj.toolbox.ui.shizuku.ShizukuManagerActivity::class.java))
+                }
                 ShizukuUtils.State.RUNNING_UNAUTHORIZED -> {
+                    if (!LicenseManager.canUseShizuku(ctx)) {
+                        Snackbar.make(binding.root, getString(R.string.shizuku_need_member), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.member_activate)) {
+                                startActivity(Intent(ctx, MemberActivity::class.java))
+                            }.show()
+                        return@setOnClickListener
+                    }
                     try { ShizukuUtils.requestPermission(permListener) } catch (e: Exception) {
                         Snackbar.make(binding.root, "请求授权失败", Snackbar.LENGTH_SHORT).show()
                     }
@@ -74,6 +77,11 @@ class MineFragment : Fragment() {
                 ShizukuUtils.State.AUTHORIZED -> Snackbar.make(binding.root, getString(R.string.shizuku_status_authorized), Snackbar.LENGTH_SHORT).show()
                 else -> Snackbar.make(binding.root, getString(R.string.shizuku_status_unknown), Snackbar.LENGTH_SHORT).show()
             }
+        }
+        // 长按 Shizuku 卡片进入内置管理页
+        binding.cardShizuku.setOnLongClickListener {
+            startActivity(Intent(ctx, com.qngxj.toolbox.ui.shizuku.ShizukuManagerActivity::class.java))
+            true
         }
 
         // 深色模式开关

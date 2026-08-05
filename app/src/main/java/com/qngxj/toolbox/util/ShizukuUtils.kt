@@ -1,19 +1,26 @@
 package com.qngxj.toolbox.util
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import androidx.core.content.FileProvider
 import moe.shizuku.server.IShizukuService
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuBinderWrapper
+import java.io.File
 
 /**
  * Shizuku 集成（SDK 内置，无需用户额外下载库）。
  * 真实授权检测：监听 Shizuku 状态与权限回调。
  *
- * 注意：Shizuku 服务的“启动”仍需用户通过 Shizuku 应用或 adb 激活，
- * 本 App 内置 SDK 与 Provider，负责检测与请求授权。
+ * V1.1.7 起：内置 Shizuku 服务端 APK（assets/shizuku.apk），
+ * 在已 root 设备上可通过 app_process 直接启动服务，无需安装 Shizuku 应用。
  */
 object ShizukuUtils {
+
+    /** 内置 Shizuku APK 在 assets 中的文件名 */
+    private const val BUNDLED_APK_NAME = "shizuku.apk"
 
     const val SHIZUKU_REQUEST_CODE = 1001
 
@@ -107,6 +114,110 @@ object ShizukuUtils {
             ""
         } finally {
             try { pfd.close() } catch (_: Exception) {}
+        }
+    }
+
+    // ==================== 内置 Shizuku 服务端（V1.1.7） ====================
+
+    /**
+     * 将内置 Shizuku APK 从 assets 释放到应用私有目录。
+     * @return 释放后的 APK 文件路径，失败返回 null
+     */
+    fun extractBundledApk(ctx: Context): String? {
+        return try {
+            val outFile = File(ctx.filesDir, BUNDLED_APK_NAME)
+            // 已存在且大小一致则跳过
+            val assetSize = ctx.assets.openFd(BUNDLED_APK_NAME).use { it.length }
+            if (outFile.exists() && outFile.length() == assetSize) {
+                return outFile.absolutePath
+            }
+            ctx.assets.open(BUNDLED_APK_NAME).use { input ->
+                outFile.outputStream().use { output ->
+                    input.copyTo(output)
+                }
+            }
+            outFile.absolutePath
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    /**
+     * 通过 Root 启动内置 Shizuku 服务端（无需安装 Shizuku 应用）。
+     *
+     * 原理：通过 su 执行 app_process，以 APK 作为 classpath 启动
+     * moe.shizuku.starter.ServiceStarter，由其初始化 rikka.shizuku.server.ShizukuService。
+     *
+     * @param ctx 上下文
+     * @return Pair(success, message)
+     */
+    fun startServiceViaRoot(ctx: Context): Pair<Boolean, String> {
+        // 1. 检测 root
+        if (!RootUtils.isRooted()) {
+            return Pair(false, "设备未 Root，无法直接启动服务\n请使用一键安装内置 Shizuku 后通过 adb 激活")
+        }
+        // 2. 释放内置 APK
+        val apkPath = extractBundledApk(ctx)
+            ?: return Pair(false, "内置 Shizuku APK 释放失败")
+        // 3. 构造启动命令（优先 app_process64）
+        val cmd = buildString {
+            append("APPPROCESS=/system/bin/app_process;")
+            append("[ -e /system/bin/app_process64 ] && APPPROCESS=/system/bin/app_process64;")
+            append("nohup \$APPPROCESS -Djava.class.path=$apkPath /system/bin ")
+            append("--nice-name=shizuku_server moe.shizuku.starter.ServiceStarter ")
+            append(">/dev/null 2>&1 &")
+        }
+        // 4. 执行
+        val (ok, out) = RootUtils.execRoot(cmd)
+        return if (ok) {
+            // 等待服务就绪
+            Thread.sleep(800)
+            Pair(true, "Shizuku 服务启动命令已执行")
+        } else {
+            Pair(false, "启动失败：${if (out.isNotEmpty()) out else "su 执行异常"}")
+        }
+    }
+
+    /**
+     * 一键安装内置 Shizuku APK（无 Root 设备的回退方案）。
+     * 触发系统安装器，用户确认后安装 Shizuku 应用。
+     */
+    fun installBundledApk(ctx: Context): Boolean {
+        return try {
+            val apkPath = extractBundledApk(ctx) ?: return false
+            val apkFile = File(apkPath)
+            // Android 7.0+ 需用 FileProvider 共享
+            val uri = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                FileProvider.getUriForFile(ctx, "${ctx.packageName}.fileprovider", apkFile)
+            } else {
+                @Suppress("DEPRECATION")
+                Uri.fromFile(apkFile)
+            }
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "application/vnd.android.package-archive")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            ctx.startActivity(intent)
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * 打开已安装的 Shizuku 应用（若存在）。
+     */
+    fun openShizukuApp(ctx: Context): Boolean {
+        return try {
+            val intent = ctx.packageManager.getLaunchIntentForPackage("moe.shizuku.privileged.api")
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                ctx.startActivity(intent)
+                true
+            } else false
+        } catch (e: Exception) {
+            false
         }
     }
 }
