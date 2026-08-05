@@ -11,8 +11,8 @@ android {
         applicationId "com.qngxj.toolbox"
         minSdk 29
         targetSdk 35
-        versionCode 1119
-        versionName "1.1.9"
+        versionCode 1120
+        versionName "1.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
