@@ -11,8 +11,8 @@ android {
         applicationId "com.qngxj.toolbox"
         minSdk 29
         targetSdk 35
-        versionCode 1118
-        versionName "1.1.8"
+        versionCode 1119
+        versionName "1.1.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -86,6 +86,7 @@ dependencies {
     implementation 'dev.rikka.shizuku:api:13.1.5'
     implementation 'dev.rikka.shizuku:shared:13.1.5'
     implementation 'dev.rikka.shizuku:aidl:13.1.5'
+    implementation 'dev.rikka.shizuku:provider:13.1.5'
 
     // 网络检查更新
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
